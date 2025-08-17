@@ -205,7 +205,7 @@ export default function AuthPage() {
           
           {/* Turnstile is always rendered but might be visually hidden or positioned off-screen */}
           <div style={{ position: 'absolute', bottom: isLogin ? '-100px' : 'calc(50% - 160px)', right: '115px', transition: 'all 0.5s' }}>
-             <Turnstile siteKey="0x4AAAAAABsQxqZZTVebXj7i" onSuccess={setCaptchaToken} />
+             <Turnstile sitekey="0x4AAAAAABsQxqZZTVebXj7i" onVerify={(token) => setCaptchaToken(token)} />
           </div>
 
           {error && (
