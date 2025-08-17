@@ -27,9 +27,13 @@ export default function VerifyEmailPage() {
 
           setStatus('success');
           setMessage('邮箱验证成功！您现在可以登录了。');
-        } catch (err: any) {
+        } catch (err: unknown) {
           setStatus('error');
-          setMessage(err.message);
+          if (err instanceof Error) {
+            setMessage(err.message);
+          } else {
+            setMessage('An unknown error occurred during verification.');
+          }
         }
       };
 

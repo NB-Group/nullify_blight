@@ -5,10 +5,27 @@ import CommentSection from '@/components/CommentSection';
 import Modal from '@/components/Modal';
 
 // Assuming types are defined centrally
+interface Paper {
+  id: string;
+  title: string;
+  abstract: string;
+  comments: any[]; // You might want to define a Comment type as well
+}
+
+interface Evidence {
+  id: string;
+  content: string;
+}
+
+interface ErrorComment {
+  id: string;
+  text: string;
+}
+
 interface ReportPackage {
-  paper: any;
-  evidences: any[];
-  errorComments: any[];
+  paper: Paper;
+  evidences: Evidence[];
+  errorComments: ErrorComment[];
 }
 
 async function getPaperDetails(id: string) {

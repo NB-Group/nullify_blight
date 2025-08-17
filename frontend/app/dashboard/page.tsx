@@ -7,12 +7,9 @@ import {
   FaUpload, 
   FaGavel, 
   FaFileAlt, 
-  FaChartLine, 
-  FaUser, 
   FaCheckCircle, 
   FaTimesCircle, 
   FaClock,
-  FaEye,
   FaTrophy,
   FaStar
 } from 'react-icons/fa';
@@ -30,6 +27,13 @@ interface DashboardStats {
 interface RecentActivity {
   id: number;
   type: 'upload' | 'audit' | 'approval' | 'rejection';
+  title: string;
+  timestamp: string;
+}
+
+interface RawActivity {
+  id: number;
+  status: 'APPROVED' | 'REJECTED' | 'PENDING' | string; 
   title: string;
   timestamp: string;
 }
@@ -52,7 +56,7 @@ export default function DashboardPage() {
           const data = await res.json();
           setStats(data.stats);
           setRecentActivities(
-            data.recentActivities.map((a: any) => ({
+            data.recentActivities.map((a: RawActivity) => ({
               id: a.id,
               type: a.status === 'APPROVED' ? 'approval' : a.status === 'REJECTED' ? 'rejection' : 'upload',
               title: a.title,

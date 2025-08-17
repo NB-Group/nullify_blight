@@ -90,7 +90,7 @@ export default function UploadPage() {
         try {
           const errorData = JSON.parse(xhr.responseText);
           setError(errorData.message || '上传失败，请稍后再试。');
-        } catch (e) {
+        } catch {
           setError('上传失败，请稍后再试。');
         }
       }

@@ -70,8 +70,12 @@ export default function AuthPage() {
       } else {
         router.push('/signup/success');
       }
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('An unexpected error occurred.');
+      }
     }
   };
 
