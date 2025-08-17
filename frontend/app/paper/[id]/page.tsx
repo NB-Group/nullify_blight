@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useParams } from 'next/navigation';
 import CommentSection from '@/components/CommentSection';
 import Modal from '@/components/Modal';
 
@@ -53,11 +54,8 @@ async function getPaperDetails(id: string) {
   }
 }
 
-export default function PaperDetailPage({
-  params,
-}: {
-  params: { id: string };
-}) {
+export default function PaperDetailPage() {
+  const params = useParams<{ id: string }>();
   const [paper, setPaper] = useState<Paper | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [reportPackage, setReportPackage] = useState<ReportPackage | null>(
@@ -65,8 +63,10 @@ export default function PaperDetailPage({
   );
 
   useEffect(() => {
-    getPaperDetails(params.id).then(setPaper);
-  }, [params.id]);
+    if (params?.id) {
+      getPaperDetails(params.id).then(setPaper);
+    }
+  }, [params?.id]);
 
   const handleReportClick = async () => {
     setIsModalOpen(true);
@@ -102,7 +102,7 @@ export default function PaperDetailPage({
 
       <div className="mt-12">
         <h2 className="text-3xl font-bold mb-6">评论与勘误</h2>
-        <CommentSection initialComments={paper.comments} paperId={paper.id} />
+        <CommentSection initialComments={paper.comments} paperId={Number(paper.id)} />
       </div>
 
       <div className="mt-12">
