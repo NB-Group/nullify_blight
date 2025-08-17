@@ -1,0 +1,220 @@
+@import "tailwindcss";
+@import "./components.css";
+@import "./premium-enhancements.css";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+body {
+	background: var(--greyLight-1);
+	color: var(--greyDark);
+	transition: all 0.3s ease;
+	font-family: 'Poppins', sans-serif;
+}
+
+/* Neumorphism auth styles (scoped by .auth- prefix to avoid bleed) */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap');
+:root {
+	--neu-1: #ecf0f3;
+	--neu-2: #d1d9e6;
+	--white: #f9f9f9;
+	--gray: #a0a5a8;
+	--black: #181818;
+	--purple: #4B70E2;
+}
+
+.auth-root {
+	font-family: 'Montserrat', system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+	color: var(--gray);
+}
+
+.auth-wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+}
+
+.auth-card {
+	width: 1000px;
+	max-width: 96vw;
+	min-height: 600px;
+	background: var(--neu-1);
+	border-radius: 12px;
+	padding: 25px;
+	box-shadow: 10px 10px 10px var(--neu-2), -10px -10px 10px var(--white);
+	position: relative;
+	overflow: hidden;
+  display: grid;
+  z-index: 1;
+}
+
+.auth-pane {
+	position: absolute;
+	top: 0;
+	height: 100%;
+	width: 600px;
+	max-width: 90%;
+	padding: 25px;
+	background: var(--neu-1);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.auth-pane.left { left: 0; }
+.auth-pane.right { right: 0; }
+
+.auth-form { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+
+.auth-title { font-size: 34px; font-weight: 700; line-height: 3; color: var(--black); }
+.auth-sub { font-size: 14px; text-align: center; line-height: 1.6; }
+
+.auth-input { height: 44px; padding-left: 24px; border: none; outline: none; border-radius: 8px; background: var(--neu-1);
+	box-shadow: inset 2px 2px 4px var(--neu-2), inset -2px -2px 4px var(--white);
+	transition: .25s ease; color: var(--black);
+}
+.auth-input:focus { box-shadow: inset 4px 4px 4px var(--neu-2), inset -4px -4px 4px var(--white); }
+
+.auth-button { width: 180px; height: 50px; border-radius: 25px; margin-top: 24px; font-weight: 700; letter-spacing: 1.15px; border: none; outline: none;
+	background: var(--purple); color: var(--white);
+	box-shadow: 8px 8px 16px var(--neu-2), -8px -8px 16px var(--white);
+	cursor: pointer; transition: .25s;
+}
+.auth-button:hover { box-shadow: 6px 6px 10px var(--neu-2), -6px -6px 10px var(--white); transform: scale(.985); }
+.auth-button:active { box-shadow: 2px 2px 6px var(--neu-2), -2px -2px 6px var(--white); transform: scale(.97); }
+
+.auth-icons { display: flex; gap: 10px; margin: 6px 0 16px; }
+.auth-icon { width: 30px; opacity: .5; filter: grayscale(1); transition: .15s; }
+.auth-icon:hover { opacity: 1; filter: none; }
+
+.auth-sep { margin: 18px 0 8px; }
+
+/* Neumorphic shadow utility */
+.shadow-neumorphic {
+  box-shadow: 10px 10px 10px var(--neu-2), -10px -10px 10px var(--white);
+}
+
+.shadow-neumorphic-inset {
+  box-shadow: inset 2px 2px 4px var(--neu-2), inset -2px -2px 4px var(--white);
+}
+
+/* Switch panel animations */
+.auth-switch {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 400px;
+	height: 100%;
+	background: var(--neu-1);
+	box-shadow: 4px 4px 10px var(--neu-2), -4px -4px 10px var(--white);
+	padding: 50px;
+	z-index: 200;
+	transition: 1.25s;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.auth-switch.is-login {
+	left: calc(100% - 400px);
+	transform-origin: left;
+}
+
+.auth-switch-circle {
+	position: absolute;
+	width: 500px;
+	height: 500px;
+	border-radius: 50%;
+	background: var(--neu-1);
+	box-shadow: inset 8px 8px 12px var(--neu-2), inset -8px -8px 12px var(--white);
+	bottom: -60%;
+	left: -60%;
+	transition: 1.25s;
+}
+
+.auth-switch-circle--t {
+	top: -30%;
+	left: 60%;
+	width: 300px;
+	height: 300px;
+}
+
+.auth-switch.is-login .auth-switch-circle {
+	transform: translateX(100px);
+}
+
+.auth-switch-content {
+	position: absolute;
+	width: 400px;
+	padding: 50px 55px;
+	transition: 1.25s;
+	text-align: center;
+}
+
+.auth-forms-container {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+.auth-pane {
+	position: absolute;
+	top: 0;
+	height: 100%;
+	width: 600px;
+	max-width: 90%;
+	padding: 25px;
+	background: var(--neu-1);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: 1.25s;
+}
+
+.signup-pane {
+	left: calc(100% - 600px);
+	z-index: 100;
+}
+
+.signin-pane {
+	left: calc(100% - 600px);
+	z-index: 0;
+}
+
+.auth-forms-container.is-login .signup-pane {
+	left: 0;
+	z-index: 0;
+}
+
+.auth-forms-container.is-login .signin-pane {
+	left: 0;
+	z-index: 100;
+}
+
+.is-hidden {
+	visibility: hidden;
+	opacity: 0;
+	transition: 1.25s;
+}
+
+.auth-link {
+	color: var(--black);
+	font-size: 15px;
+	margin-top: 25px;
+	border-bottom: 1px solid var(--gray);
+	line-height: 2;
+	cursor: pointer;
+}
+
+/* Animation for switch effect */
+.auth-switch.is-gx {
+	animation: is-gx 1.25s;
+}
+
+@keyframes is-gx {
+	0%, 10%, 100% { width: 400px; }
+	30%, 50% { width: 500px; }
+}
+
+/* Dark mode fallback for app layout wrapper */
+html[data-theme='dark'] .auth-wrapper, .dark .auth-wrapper { background: #0b0c10; }

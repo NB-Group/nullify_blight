@@ -1,0 +1,323 @@
+:root {
+  --primary-light: #8abdff;
+  --primary: #6d5dfc;
+  --primary-dark: #5b0eeb;
+  
+  --white: #FFFFFF;
+  --greyLight-1: #E4EBF5;
+  --greyLight-2: #c8d0e7;
+  --greyLight-3: #bec8e4;
+  --greyDark: #9baacf;
+}
+
+.shadow-neumorphic-new {
+  box-shadow: .3rem .3rem .6rem var(--greyLight-2), 
+              -.2rem -.2rem .5rem var(--white);
+}
+
+.inner-shadow-neumorphic-new {
+  box-shadow: inset .2rem .2rem .5rem var(--greyLight-2), 
+              inset -.2rem -.2rem .5rem var(--white);
+}
+
+
+/*  SWITCH  */
+.switch { 
+  display: grid;
+  grid-template-columns: repeat(2, min-content);
+  grid-gap: 3rem;
+  justify-self: center;
+}
+
+.switch input { display: none; }
+  
+.switch__1, .switch__2 {
+  width: 6rem;
+}
+
+.switch__1 label, .switch__2 label {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 3rem;
+  box-shadow: .3rem .3rem .6rem var(--greyLight-2), -.2rem -.2rem .5rem var(--white);
+  background: rgba(255,255,255,0);
+  position: relative;
+  cursor: pointer;
+  border-radius: 1.6rem;
+}
+
+.switch__1 label::after, .switch__2 label::after {
+  content: "";
+  position: absolute;
+  left: .4rem;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 50%;
+  background: var(--greyDark);
+  transition: all .4s ease;
+}
+
+.switch__1 label::before, .switch__2 label::before {
+  content: '';
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(330deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%);
+  opacity: 0;
+  transition: all .4s ease;
+}
+
+.switch input:checked ~ label::before { opacity: 1; }
+.switch input:checked ~ label::after {
+  left: 57%; 
+  background: var(--greyLight-1);
+}
+
+/*  CHECKBOX  */
+.checkbox { 
+  display: grid;
+  grid-template-columns: repeat(2, 6rem);
+  grid-gap: 3rem;
+  justify-content: center;
+}
+
+.checkbox input { display: none; }
+  
+.checkbox__1, .checkbox__2 {
+  width: 6rem;
+  display: flex;
+  justify-content: center;
+}
+
+.checkbox__1 label, .checkbox__2 label {
+  box-shadow: .3rem .3rem .6rem var(--greyLight-2), -.2rem -.2rem .5rem var(--white);
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: .5rem;
+  width: 2.8rem;
+  height: 2.8rem;
+}
+    
+.checkbox__1 label:hover i, .checkbox__2 label:hover i { color: var(--primary); }
+    
+.checkbox__1 label i, .checkbox__2 label i {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--greyDark);
+  transition: .3s ease;
+}
+  
+.checkbox input:checked ~ label {
+  box-shadow: inset .2rem .2rem .5rem var(--greyLight-2), inset -.2rem -.2rem .5rem var(--white);
+}
+
+.checkbox input:checked ~ label i {
+  color: var(--primary);
+}
+
+/*  RADIO  */
+.radio { 
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: center;
+}
+
+.radio input { display: none; }
+  
+.radio__1 input:checked ~ label, .radio__2 input:checked ~ label { 
+  box-shadow: inset .2rem .2rem .5rem var(--greyLight-2), inset -.2rem -.2rem .5rem var(--white);
+}
+
+.radio__1 input:checked ~ label::after, .radio__2 input:checked ~ label::after {
+  background: var(--primary);
+}
+
+.radio__1 label, .radio__2 label {
+  box-shadow: .3rem .3rem .6rem var(--greyLight-2), -.2rem -.2rem .5rem var(--white);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 50%;
+}
+
+.radio__1 label:hover::after, .radio__2 label:hover::after {
+  background: var(--primary);
+}
+      
+.radio__1 label::after, .radio__2 label::after {
+  content: "";
+  position: absolute;
+  width: 1.4rem;
+  height: 1.4rem;
+  background: var(--greyDark);
+  border-radius: 50%;
+  transition: 0.3s ease;
+}
+
+/*  BUTTONS  */
+.btn {
+  width: 15rem;
+  height: 4rem;
+  border-radius: 1rem;
+  box-shadow: .3rem .3rem .6rem var(--greyLight-2), -.2rem -.2rem .5rem var(--white);
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: .3s ease;
+}
+
+.btn__primary {
+  background: var(--primary);
+  box-shadow:inset .2rem .2rem 1rem var(--primary-light), 
+            inset -.2rem -.2rem 1rem var(--primary-dark),
+            .3rem .3rem .6rem var(--greyLight-2), -.2rem -.2rem .5rem var(--white);
+  color: var(--greyLight-1);
+}
+
+.btn__primary:hover { color: var(--white); }
+.btn__primary:active {
+  box-shadow:inset .2rem .2rem 1rem var(--primary-dark), 
+         inset -.2rem -.2rem 1rem var(--primary-light);
+}
+
+.btn__secondary {
+  color: var(--greyDark);
+}
+
+.btn__secondary:hover { color: var(--primary); }
+.btn__secondary:active {
+  box-shadow: inset .2rem .2rem .5rem var(--greyLight-2), inset -.2rem -.2rem .5rem var(--white);
+}
+
+.btn p { 
+  font-size: 1.6rem;
+}
+
+/*  FORM  */
+.form__input {
+  width: 100%;
+  height: 4rem;
+  border: none;
+  border-radius: 1rem;
+  font-size: 1.4rem;
+  padding-left: 1.4rem;
+  box-shadow: inset .2rem .2rem .5rem var(--greyLight-2), inset -.2rem -.2rem .5rem var(--white);
+  background: none;
+  font-family: inherit;
+  color: var(--greyDark);
+}
+
+.form__input::placeholder { color: var(--greyLight-3); }
+.form__input:focus { 
+  outline: none; 
+  box-shadow: .3rem .3rem .6rem var(--greyLight-2), -.2rem -.2rem .5rem var(--white); 
+}
+  
+/*  SEARCH  */
+.search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search__input {
+  width: 100%;
+  height: 4rem;
+  border: none;
+  border-radius: 1rem;
+  font-size: 1.4rem;
+  padding-left: 3.8rem;
+  box-shadow: inset .2rem .2rem .5rem var(--greyLight-2), inset -.2rem -.2rem .5rem var(--white);
+  background: none;
+  font-family: inherit;
+  color: var(--greyDark);
+}
+
+.search__input::placeholder { color: var(--greyLight-3); }
+.search__input:focus { 
+  outline: none; 
+  box-shadow: .3rem .3rem .6rem var(--greyLight-2), -.2rem -.2rem .5rem var(--white);
+}
+
+.search__input:focus + .search__icon {
+  color: var(--primary);
+}
+
+.search__icon {
+  height: 2rem;
+  position: absolute;
+  font-size: 2rem;
+  padding: 0 1rem;
+  display: flex;
+  color: var(--greyDark);
+  transition: .3s ease;
+}
+
+/*  SEGMENTED-CONTROL */
+.segmented-control {
+  width: 20.4rem;
+  height: 4rem;
+  box-shadow: .3rem .3rem .6rem var(--greyLight-2), -.2rem -.2rem .5rem var(--white);
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.segmented-control input { display: none; }
+
+.segmented-control > input:checked + label {
+  transition: all .5s ease;
+  color: var(--primary);
+}
+
+.segmented-control__1, .segmented-control__2, .segmented-control__3 {
+  width: 6.8rem;
+  height: 3.6rem;
+  font-size: 1.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: var(--greyDark);
+  transition: all .5s ease;
+}
+
+.segmented-control__1:hover, .segmented-control__2:hover, .segmented-control__3:hover { 
+  color: var(--primary); 
+}
+
+.segmented-control__color {
+  position: absolute;
+  height: 3.4rem;
+  width: 6.2rem;
+  margin-left: .3rem;
+  border-radius: .8rem;
+  box-shadow: inset .2rem .2rem .5rem var(--greyLight-2), inset -.2rem -.2rem .5rem var(--white);
+  pointer-events: none;
+}
+
+#tab-1:checked ~ .segmented-control__color,
+#tab-file:checked ~ .segmented-control__color {
+  transform: translateX(0);
+  transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+#tab-2:checked ~ .segmented-control__color,
+#tab-text:checked ~ .segmented-control__color {
+  transform: translateX(10.2rem);
+  transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+#tab-3:checked ~ .segmented-control__color {
+  transform: translateX(13.6rem);
+  transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
