@@ -52,7 +52,7 @@ export default function AuthPage() {
         ? { email, password, captchaToken: captchaToken || 'not-required-for-login' }
         : { email, password, name: name || undefined, captchaToken };
 
-      const res = await fetch(`http://127.0.0.1:3001${endpoint}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}${endpoint}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
@@ -150,7 +150,7 @@ export default function AuthPage() {
                 <button type="submit" className="auth-button">注册</button>
                 <div className="auth-sep" />
                 <a
-                  href="http://127.0.0.1:3001/auth/github"
+                  href={`${process.env.NEXT_PUBLIC_API_URL}/auth/github`}
                   className="auth-button flex items-center justify-center gap-2"
                   style={{background: 'var(--greyDark)', color: 'var(--white)', marginTop: '-35px'}}
                 >
@@ -190,7 +190,7 @@ export default function AuthPage() {
                 
                 <div className="auth-sep" />
                 <a
-                  href="http://127.0.0.1:3001/auth/github"
+                  href={`${process.env.NEXT_PUBLIC_API_URL}/auth/github`}
                   className="auth-button flex items-center justify-center gap-2"
                   style={{background: 'var(--greyDark)', color: 'var(--white)', marginTop: '-35px'}}
                 >

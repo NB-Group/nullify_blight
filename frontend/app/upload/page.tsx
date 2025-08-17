@@ -69,7 +69,7 @@ export default function UploadPage() {
     formData.append('file', file);
 
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'http://127.0.0.1:3001/paper', true);
+    xhr.open('POST', `${process.env.NEXT_PUBLIC_API_URL}/paper`, true);
     xhr.setRequestHeader('Authorization', `Bearer ${token}`);
     
     xhr.upload.onprogress = (event) => {

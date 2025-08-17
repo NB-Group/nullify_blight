@@ -30,7 +30,7 @@ export default function AuditPage() {
     setError('');
     try {
       // Fetch audit task
-      const taskRes = await fetch('http://127.0.0.1:3001/audit/task', {
+      const taskRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/audit/task`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -46,7 +46,7 @@ export default function AuditPage() {
 
       // Fetch audit stats - assuming a separate endpoint
       // In a real app, this might be combined with the task fetch
-      // const statsRes = await fetch('http://127.0.0.1:3001/audit/stats');
+      // const statsRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/audit/stats`);
       // const statsData = await statsRes.json();
       // setStats(statsData);
 
@@ -72,7 +72,7 @@ export default function AuditPage() {
     if (!task) return;
     setIsSubmitting(true);
     try {
-      const res = await fetch('http://127.0.0.1:3001/audit/submit', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/audit/submit`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

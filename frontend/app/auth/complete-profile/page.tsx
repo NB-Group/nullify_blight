@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 
-export default function CompleteProfilePage() {
+function CompleteProfileInner() {
   const [name, setName] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -33,7 +33,7 @@ export default function CompleteProfilePage() {
 
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch('http://127.0.0.1:3000/auth/profile', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/profile`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -90,5 +90,13 @@ export default function CompleteProfilePage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function CompleteProfilePage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+      <CompleteProfileInner />
+    </Suspense>
   );
 }

@@ -1,16 +1,27 @@
 import PaperCard from '@/components/PaperCard';
 import { FaRocket, FaShieldAlt, FaUsers, FaChartLine, FaBookOpen, FaAward } from 'react-icons/fa';
 
-async function getPapers() {
+interface Paper {
+  id: number;
+  title: string;
+  abstract: string;
+  uploader: {
+    name: string;
+  };
+  createdAt?: string;
+}
+
+async function getPapers(): Promise<Paper[]> {
   try {
-    const res = await fetch('http://127.0.0.1:3001/paper', {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/paper`, {
       cache: 'no-store',
     });
     if (!res.ok) {
       console.error('Failed to fetch papers, status:', res.status);
       return [];
     }
-    return res.json();
+    const data: Paper[] = await res.json();
+    return data;
   } catch (error) {
     console.error('Fetch error:', error);
     return [];
@@ -101,7 +112,7 @@ export default async function HomePage() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {papers.length > 0 ? (
-              papers.map((paper) => <PaperCard key={paper.id} paper={paper} />)
+              papers.map((paper: Paper) => <PaperCard key={paper.id} paper={paper} />)
             ) : (
               <div className="col-span-full">
                 <div className="card-premium shadow-premium-hover p-16 text-center">

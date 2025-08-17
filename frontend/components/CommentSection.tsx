@@ -39,7 +39,7 @@ export default function CommentSection({
     }
 
     try {
-      const res = await fetch('http://localhost:3000/comment', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/comment`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -41,7 +41,7 @@ interface ReportPackage {
 
 async function getPaperDetails(id: string) {
   try {
-    const res = await fetch(`http://localhost:3000/paper/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/paper/${id}`, {
       cache: 'no-store',
     });
     if (!res.ok) {
@@ -72,7 +72,7 @@ export default function PaperDetailPage() {
     setIsModalOpen(true);
     try {
       const res = await fetch(
-        `http://localhost:3000/paper/${params.id}/report-package`,
+        `${process.env.NEXT_PUBLIC_API_URL}/paper/${params.id}/report-package`,
       );
       if (!res.ok) throw new Error('Failed to fetch report package');
       const data = await res.json();
