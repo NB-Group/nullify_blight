@@ -58,7 +58,7 @@ export default function PaperDetailPage({
 }: {
   params: { id: string };
 }) {
-  const [paper, setPaper] = useState(null);
+  const [paper, setPaper] = useState<Paper | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [reportPackage, setReportPackage] = useState<ReportPackage | null>(
     null,
