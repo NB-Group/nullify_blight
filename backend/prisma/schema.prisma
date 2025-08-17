@@ -1,0 +1,103 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String?
+  name      String?
+  githubId  String?  @unique
+  isVerified Boolean @default(false)
+  verificationToken String?  @unique
+  lastLogin DateTime @default(now())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  papers    Paper[]
+  evidences Evidence[]
+  comments  Comment[]
+  audits    Audit[]
+}
+
+enum Status {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model Paper {
+  id          Int      @id @default(autoincrement())
+  title       String
+  abstract    String   @db.Text
+  filePath    String
+  isPublic    Boolean  @default(false)
+  errorCount  Int      @default(0)
+  status      Status   @default(PENDING)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  uploader    User?    @relation(fields: [uploaderId], references: [id])
+  uploaderId  Int?
+
+  evidences   Evidence[]
+  comments    Comment[]
+  audits      Audit[]
+}
+
+model Evidence {
+  id          Int      @id @default(autoincrement())
+  filePath    String
+  description String   @db.Text
+  status      Status   @default(PENDING)
+  createdAt   DateTime @default(now())
+
+  paper       Paper    @relation(fields: [paperId], references: [id])
+  paperId     Int
+
+  uploader    User     @relation(fields: [uploaderId], references: [id])
+  uploaderId  Int
+  audits      Audit[]
+}
+
+model Audit {
+  id        Int      @id @default(autoincrement())
+  decision  Boolean  // true for approve, false for reject
+  createdAt DateTime @default(now())
+
+  auditor   User     @relation(fields: [auditorId], references: [id])
+  auditorId Int
+
+  paper     Paper?   @relation(fields: [paperId], references: [id])
+  paperId   Int?
+
+  evidence  Evidence? @relation(fields: [evidenceId], references: [id])
+  evidenceId Int?
+
+  @@unique([auditorId, paperId])
+  @@unique([auditorId, evidenceId])
+}
+
+model Comment {
+  id          Int      @id @default(autoincrement())
+  content     String   @db.Text
+  isError     Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  paper       Paper    @relation(fields: [paperId], references: [id])
+  paperId     Int
+
+  author      User     @relation(fields: [authorId], references: [id])
+  authorId    Int
+}
