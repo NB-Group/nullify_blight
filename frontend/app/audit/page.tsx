@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '@/context/AuthContext';
-import { FaCheck, FaTimes, FaSpinner, FaExclamationCircle, FaBookOpen, FaUsers, FaAward } from 'react-icons/fa';
+import { FaCheck, FaTimes, FaExclamationCircle, FaBookOpen, FaUsers, FaAward } from 'react-icons/fa';
 import LoadingSpinner from '@/components/LoadingSpinner';
 
 interface AuditTask {
@@ -25,7 +25,7 @@ export default function AuditPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { token } = useAuth();
 
-  const fetchTask = async () => {
+  const fetchTask = useCallback(async () => {
     setIsLoading(true);
     setError('');
     try {
@@ -57,12 +57,16 @@ export default function AuditPage() {
         auditAccuracy: 94.2,
       });
 
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('An unknown error occurred while fetching the task.');
+      }
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [token]);
 
   const submitAudit = async (decision: boolean) => {
     if (!task) return;
@@ -95,8 +99,12 @@ export default function AuditPage() {
         fetchTask();
       }, 1500);
       
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('An unknown error occurred during submission.');
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -106,7 +114,7 @@ export default function AuditPage() {
     if (token) {
       fetchTask();
     }
-  }, [token]);
+  }, [token, fetchTask]);
 
   const renderContent = () => {
     if (isLoading) {

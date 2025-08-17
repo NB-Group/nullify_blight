@@ -5,11 +5,21 @@ import CommentSection from '@/components/CommentSection';
 import Modal from '@/components/Modal';
 
 // Assuming types are defined centrally
+interface Comment {
+  id: number;
+  content: string;
+  isError: boolean;
+  author: {
+    name: string | null;
+    email: string;
+  };
+}
+
 interface Paper {
   id: string;
   title: string;
   abstract: string;
-  comments: any[]; // You might want to define a Comment type as well
+  comments: Comment[];
 }
 
 interface Evidence {
